@@ -38,9 +38,9 @@
 		<!-- 페이징 영역 -->	  
 			<div>
 		<span>
-			<c:forEach begin="0" end="${page-1}" varStatus="stat">
-		<a href ="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a>
-		</c:forEach>		
+			<c:forEach begin="0" end="${page}" varStatus="stat">
+				<a href ="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a>
+			</c:forEach>		
 			</span>
 		</div>
 	 </div><!-- /.container -->

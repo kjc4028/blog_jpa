@@ -20,8 +20,8 @@
 					<form:input path="title" class="form-control" placeholder="Enter title" value=""/>
 				</div>
 				<div class="form-group">
-					<label for="categorySeq" class="col-sm-2 control-label">category</label>
-					<form:select path="categorySeq" class="custom-select d-block w-50">
+					<label for="categoryEntity.categorySeq" class="col-sm-2 control-label">category</label>
+					<form:select path="categoryEntity.categorySeq" class="custom-select d-block w-50">
 						<c:forEach items="${categoryList}" var="ctgList">
 							<form:option value="${ctgList.getCategorySeq()}">${ctgList.getCategoryNm()}</form:option>
 						</c:forEach>					

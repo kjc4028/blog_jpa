@@ -1,7 +1,9 @@
 package com.dev.jpa.category;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.repository.Query;
 
+import com.dev.jpa.bbs.BbsEntity;
 import com.dev.jpa.usr.entity.RoleUsrEntity;
 import com.dev.jpa.usr.entity.UsrEntity;
 

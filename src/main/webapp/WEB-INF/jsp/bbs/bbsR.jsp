@@ -21,7 +21,8 @@
 					${bbsEntity.title}
 				</div>
 				<div class="form-group">
-				카테고리
+					<label for="contents" class="col-sm-2 control-label">카테고리</label>
+					${bbsEntity.categoryEntity.categoryNm}
 				</div>
 				<div class="form-group">
 					<label for="contents" class="col-sm-2 control-label">contents</label>

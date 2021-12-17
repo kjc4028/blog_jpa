@@ -47,15 +47,23 @@ public class BbsEntity {
 	@Column(length = 1, nullable = false)
 	private String useYn;
 	
-	@Column
-	private int categorySeq;
+	/*
+	 * @Column private int categorySeq;
+	 */
 	
 	/*
 	 * @ManyToOne
 	 * 
-	 * @JoinColumn(name = "categorySeq", referencedColumnName = "categorySeq")
-	 * private CategoryEntity categoryEntity;
+	 * @JoinColumn(name="categorySeq", foreignKey = @ForeignKey(name =
+	 * "CategoryEntity", value = ConstraintMode.CONSTRAINT)) private CategoryEntity
+	 * CategoryEntity;
 	 */
+	
+	
+	  @ManyToOne
+	  @JoinColumn(name = "categorySeq", referencedColumnName = "categorySeq")
+	  private CategoryEntity categoryEntity;
+	 
 	
 	@ManyToOne
 	@JoinColumn(name="user_id", foreignKey = @ForeignKey(name = "usrEntity", value = ConstraintMode.CONSTRAINT))
