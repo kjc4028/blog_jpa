@@ -29,7 +29,7 @@ public class BbsEntity {
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bbsSeq;
 	
 	@Column(nullable = false)
