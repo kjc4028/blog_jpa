@@ -1,5 +1,6 @@
 package com.dev.jpa.bbs;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,8 +45,7 @@ public class BbsController {
 		
 		Page<BbsEntity> pageData = bbsService.findByUsrEntityPage(request.getRemoteUser(), pageNum);
 				
-		model.addAttribute("page", pageData.getTotalPages());
-		model.addAttribute("pageList", pageData.getContent());
+		model.addAttribute("pageList", pageData);
 		
 		return "bbs/bbsList";
 	}
@@ -62,8 +62,8 @@ public class BbsController {
 			pageNum = 1;
 		}
 		Page<BbsEntity> pageData = bbsService.findOpenPage(pageNum);
-		model.addAttribute("page", pageData.getTotalPages());
-		model.addAttribute("pageList", pageData.getContent());
+		
+		model.addAttribute("pageList", pageData);
 		
 		return "bbs/bbsList";
 	}
@@ -115,6 +115,5 @@ public class BbsController {
 		bbsService.save(bbsEntity);
 		return "redirect:/bbs/list";
 	}
-	
 	
 }

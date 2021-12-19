@@ -24,7 +24,8 @@
 					  <th class="info">등록일자</th>
 					  <th class="info">작성자</th>
 					</tr>
-					<c:forEach items="${pageList}" var="list">
+					
+					<c:forEach items="${pageList.content}" var="list">
 						<tr>
 						    <td class="info">${list.bbsSeq}</td>
 							<td class="info"><a href="/bbs/${list.bbsSeq}">${list.title}</a></td>
@@ -36,13 +37,14 @@
 			</div><!-- /.col-lg-10 -->
 		</div><!-- /.row -->
 		<!-- 페이징 영역 -->	  
-			<div>
-		<span>
-			<c:forEach begin="0" end="${page}" varStatus="stat">
-				<a href ="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a>
+		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		    <c:forEach begin="1" end="${pageList.totalPages}" varStatus="stat">
+					<li class="page-item"><a class="page-link" href="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a></li>
 			</c:forEach>		
-			</span>
-		</div>
+		  </ul>
+		</nav>		
 	 </div><!-- /.container -->
 </main>
 	
