@@ -17,15 +17,17 @@
 	    <div class="row">
 	      <div class="col-lg-10">
 				<div class="form-group">
-					<label for="title" class="col-sm-2 control-label">title</label>
-					${bbsEntity.title}
+					<figure>
+					  <blockquote class="blockquote">
+					    <p>${bbsEntity.title}</p>
+					  </blockquote>
+					  <figcaption class="blockquote-footer">
+										카테고리 - ${bbsEntity.categoryEntity.categoryNm}
+					  </figcaption>
+					</figure>
 				</div>
-				<div class="form-group">
-					<label for="contents" class="col-sm-2 control-label">카테고리</label>
-					${bbsEntity.categoryEntity.categoryNm}
-				</div>
-				<div class="form-group">
-					<label for="contents" class="col-sm-2 control-label">contents</label>
+				
+				<div class="form-group" style="height: auto;">
 					${bbsEntity.contents}
 				</div>
 				
@@ -39,7 +41,7 @@
 	    </div><!-- /.row -->
 	  </div><!-- /.container -->
 	</main>
-	
+
 <script type="text/javascript">
 	function updateView(bbsSeq){
 		location.href = '/bbs/update/'+bbsSeq;
