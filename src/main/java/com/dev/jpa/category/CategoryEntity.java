@@ -42,7 +42,7 @@ public class CategoryEntity {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int categorySeq;
 	
 	/*@Column(name="usr_id")
