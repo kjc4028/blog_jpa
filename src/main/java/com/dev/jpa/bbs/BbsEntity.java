@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import com.dev.jpa.category.CategoryEntity;
 import com.dev.jpa.usr.entity.RoleUsrEntity;
@@ -73,6 +74,11 @@ public class BbsEntity {
 	public void prepersist() {
 		this.useYn = this.useYn == null ? "N" : this.useYn;
 		this.regDate = new Date();
+		this.modDate = new Date();
+	}
+
+	@PreUpdate
+	public void preupdate() {
 		this.modDate = new Date();
 	}
 	
