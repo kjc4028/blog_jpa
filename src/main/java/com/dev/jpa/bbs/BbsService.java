@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,17 @@ public class BbsService {
 	public BbsEntity findByBbsSeq(int bbsSeq) {
 		return bbsRepository.findByBbsSeq(bbsSeq);
 	}
+
+	/**
+	 * 전체검색
+	 * @param bbsEntity
+	 * @param pageNum
+	 * @return
+	 */
+	public Page<BbsEntity> findByUseYnAndLikeTitleAndContents(BbsEntity bbsEntity, int pageNum) {
+		//return bbsRepository.findByTitleContainsOrContentsContains(bbsEntity.getUseYn(),bbsEntity.getTitle(),bbsEntity.getContents(), PageRequest.of(pageNum-1, 10, Sort.by(Sort.Direction.DESC, "bbsSeq")));
+		return bbsRepository.findByTitleContainsOrContentsContains(bbsEntity.getTitle(),bbsEntity.getContents(), PageRequest.of(pageNum-1, 10, Sort.by(Sort.Direction.DESC, "bbsSeq")));
+	}
+	
 	
 }

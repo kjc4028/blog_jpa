@@ -22,4 +22,11 @@ public interface BbsRepository extends JpaRepository<BbsEntity, Long>{
 	
 	//공개 게시물만 조회
 	Page<BbsEntity> findByUseYn(String useYn, Pageable pageable);
+
+	//게시물 전체검색
+	//TODO QueryDSL 사용하여 UseYn and (title or contents) 쿼리로 변경하기
+	//Page<BbsEntity> findByUseYnAndTitleContainsOrContentsContains(String useYn, String title, String contents, Pageable pageable);
+	Page<BbsEntity> findByTitleContainsOrContentsContains(String title, String contents, Pageable pageable);
+	
+	
 }

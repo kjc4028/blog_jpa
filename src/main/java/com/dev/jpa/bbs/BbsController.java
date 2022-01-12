@@ -122,4 +122,28 @@ public class BbsController {
 		return "redirect:/bbs/list";
 	}
 	
+	@RequestMapping(value = "/totalSearch", method = RequestMethod.GET)
+	public String selectTotalSearchList(Model model, HttpServletRequest request, HttpServletResponse response, BbsEntity bbsEntity) {
+		
+		if(request.getParameter("srchTxt") != null) {
+			bbsEntity.setTitle(request.getParameter("srchTxt"));
+			bbsEntity.setContents(request.getParameter("srchTxt"));
+		}
+		
+		bbsEntity.setUseYn("Y");
+		int pageNum = 1;
+		if(request.getParameter("pageNum") !=null && !"".equals(request.getParameter("pageNum"))) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		
+		if(pageNum < 0) {
+			pageNum = 1;
+		}
+		Page<BbsEntity> pageData = bbsService.findByUseYnAndLikeTitleAndContents(bbsEntity, pageNum);
+		
+		model.addAttribute("pageList", pageData);
+		
+		return "bbs/bbsList";
+	}
+	
 }
