@@ -124,10 +124,11 @@ public class BbsController {
 	
 	@RequestMapping(value = "/totalSearch", method = RequestMethod.GET)
 	public String selectTotalSearchList(Model model, HttpServletRequest request, HttpServletResponse response, BbsEntity bbsEntity) {
-		
+		String srchTxt = "";
 		if(request.getParameter("srchTxt") != null) {
 			bbsEntity.setTitle(request.getParameter("srchTxt"));
 			bbsEntity.setContents(request.getParameter("srchTxt"));
+			srchTxt = request.getParameter("srchTxt");
 		}
 		
 		bbsEntity.setUseYn("Y");
@@ -139,9 +140,11 @@ public class BbsController {
 		if(pageNum < 0) {
 			pageNum = 1;
 		}
-		Page<BbsEntity> pageData = bbsService.findByUseYnAndLikeTitleAndContents(bbsEntity, pageNum);
+		//Page<BbsEntity> pageData = bbsService.findByUseYnAndLikeTitleAndContents(bbsEntity, pageNum);
+		Page<BbsEntity> pageData = bbsService.findByUseYnAndLikeTitleAndContentsForDsl(srchTxt, pageNum);
 		
 		model.addAttribute("pageList", pageData);
+		model.addAttribute("srchTxt", srchTxt);
 		
 		return "bbs/bbsList";
 	}

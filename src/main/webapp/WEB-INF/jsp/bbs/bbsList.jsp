@@ -37,11 +37,18 @@
 			</div><!-- /.col-lg-10 -->
 		</div><!-- /.row -->
 		<!-- 페이징 영역 -->	  
-		
+
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		    <c:forEach begin="1" end="${pageList.totalPages}" varStatus="stat">
-					<li class="page-item"><a class="page-link" href="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a></li>
+					<c:choose>
+						<c:when test="${empty srchTxt}">
+							<li class="page-item"><a class="page-link" href="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="/bbs/totalSearch?srchTxt=${srchTxt}&pageNum=${stat.count}">${stat.count}</a></li>
+						</c:otherwise>
+					</c:choose>
 			</c:forEach>		
 		  </ul>
 		</nav>		
