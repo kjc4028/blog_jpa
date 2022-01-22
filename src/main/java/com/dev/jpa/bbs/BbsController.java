@@ -146,7 +146,7 @@ public class BbsController {
 		model.addAttribute("pageList", pageData);
 		model.addAttribute("srchTxt", srchTxt);
 		
-		return "bbs/bbsList";
+		return "bbs/bbsSrchList";
 	}
 	
 }

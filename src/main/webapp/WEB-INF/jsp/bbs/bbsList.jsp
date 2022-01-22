@@ -41,14 +41,7 @@
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		    <c:forEach begin="1" end="${pageList.totalPages}" varStatus="stat">
-					<c:choose>
-						<c:when test="${empty srchTxt}">
-							<li class="page-item"><a class="page-link" href="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="/bbs/totalSearch?srchTxt=${srchTxt}&pageNum=${stat.count}">${stat.count}</a></li>
-						</c:otherwise>
-					</c:choose>
+				<li class="page-item"><a class="page-link" href="/bbs/totallist?pageNum=${stat.count}">${stat.count}</a></li>
 			</c:forEach>		
 		  </ul>
 		</nav>		
