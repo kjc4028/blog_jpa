@@ -91,9 +91,8 @@ public class BbsController {
 	public String bbsUpdate(Model model, HttpServletRequest request, HttpServletResponse response, BbsEntity bbsEntity) {
 		
 		BbsEntity exist_bbsEntity = bbsService.findByBbsSeq(bbsEntity.getBbsSeq());
-		
-		String replageCts = bbsEntity.getContents().replace("\n", "<br>");
-		bbsEntity.setContents(replageCts);
+		//String replageCts = bbsEntity.getContents().replace("\n", "<br>");
+		//bbsEntity.setContents(replageCts);
 		bbsEntity.setUsrEntity(CommonUtil.getUserIdFromSession(request));
 		bbsEntity.setRegDate(exist_bbsEntity.getRegDate()); // 업데이트 시 null 값으로 저장되는 현상 조치
 		
@@ -115,8 +114,10 @@ public class BbsController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String bbsInsert(Model model, HttpServletRequest request, HttpServletResponse response, BbsEntity bbsEntity) {
 		
-		String replageCts = bbsEntity.getContents().replace("\n", "<br>");
-		bbsEntity.setContents(replageCts);
+		/*
+		 * String replageCts = bbsEntity.getContents().replace("\n", "<br>");
+		 * bbsEntity.setContents(replageCts);
+		 */
 		bbsEntity.setUsrEntity(CommonUtil.getUserIdFromSession(request));
 		bbsService.save(bbsEntity);
 		return "redirect:/bbs/list";

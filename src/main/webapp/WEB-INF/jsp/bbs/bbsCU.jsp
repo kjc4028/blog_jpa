@@ -14,7 +14,10 @@
 	  <div class="container marketing">
 	    <div class="row">
 	      <div class="col-lg-10">
-			<form:form modelAttribute="bbsEntity" method="post" class="form-horizontal">
+	      <div>
+		      <span class="btn btn-primary" onclick="wfSel.insert('<b>','</b>'); return false;">굵게</span>
+	      </div>
+			<form:form modelAttribute="bbsEntity" method="post" class="form-horizontal" onsubmit="return bbsSubmit();">
 				<div class="form-group">
 					<label for="title" class="col-sm-2 control-label">title</label>
 					<form:input path="title" class="form-control" placeholder="Enter title" value=""/>
@@ -28,8 +31,15 @@
 					</form:select>
 				</div>
 				<div class="form-group">
-					<label for="contents" class="col-sm-2 control-label">contents</label>
-					<form:textarea path="contents" class="form-control" placeholder="Enter contents" value="" style="height: 200px;"/>
+					<label for="contents_user" class="col-sm-2 control-label">contents</label>
+					<%-- <form:textarea path="contents" class="form-control" placeholder="Enter contents" value="" style="height: 400px;" htmlEscape="false"/> --%>
+					<%-- <textarea rows="20" cols=100>
+						<c:out value="${bbsEntity.contents}" escapeXml="true"/>
+					</textarea> --%>
+					<div id="contents_user" name="contents_user" contenteditable="true">
+						<c:out value="${bbsEntity.contents}" escapeXml="false"/>
+					</div>
+					<input name = "contents" id = "contents" type="hidden" value=""/>
 				</div>
 				<div class="form-group">
 					<label for="useYn" class="col-sm-2 control-label">공개여부</label>
@@ -54,6 +64,53 @@
 			//event.preventDefault();
 		}
 	})
+	
+	//수정 등록
+	function bbsSubmit(){
+		$("#contents").val($("#contents_user").html());
+		//$("#bbsEntity").submit();
+		return true;
+	}
+	
+	//텍스트 드래그하여 선택해서 기능 추가 부분
+	  var wfSel = (() => {
+		  var sel, range, content, node;
+
+		  return {
+		    setVariables: () => {
+		      sel = window.getSelection();
+		      if (!sel) return;
+		      // Set variables
+		      range = sel.getRangeAt(0);
+		      content = range.cloneContents();
+		      node = document.createElement('span');
+		    },
+		    getTEXT() {
+		      this.setVariables();
+		      return sel.toString();
+		    },
+		    getHTML() {
+		      this.setVariables();
+		      const span = document.createElement('span');
+		      span.appendChild(content);
+		      return span.innerHTML;
+		    },
+		    insert(before, after) {
+		      before = before || '';
+		      after = after || '';
+		      this.replace(before + wfSel.getHTML() + after);
+		    },
+		    replace(text) {
+		      this.setVariables();
+		      node.innerHTML = text;
+		      range.deleteContents();
+		      range.insertNode(node.childNodes[0]);
+		    },
+		    removeTag: function() {
+		      this.replace(wfSel.getTEXT());
+		    }
+		  }
+		})(); 
 </script>
 </body>
 </html>
