@@ -14,43 +14,46 @@
 	  <div class="container marketing">
 	    <div class="row">
 	      <div class="col-lg-10">
-	      <div>
-		      <span class="btn btn-primary" onclick="wfSel.insert('<b>','</b>'); return false;">굵게</span>
-	      </div>
 			<form:form modelAttribute="bbsEntity" method="post" class="form-horizontal" onsubmit="return bbsSubmit();">
-				<div class="form-group">
-					<label for="title" class="col-sm-2 control-label">title</label>
-					<form:input path="title" class="form-control" placeholder="Enter title" value=""/>
+			<div class="form-group">
+				<form:input path="title" class="form-control" placeholder="제목을 입력하세요." value=""/>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<%-- <form:textarea path="contents" class="form-control" placeholder="Enter contents" value="" style="height: 400px;" htmlEscape="false"/> --%>
+				<%-- <textarea rows="20" cols=100>
+					<c:out value="${bbsEntity.contents}" escapeXml="true"/>
+				</textarea> --%>
+				<div class="form-control" style="height: auto;" id="contents_user" name="contents_user" contenteditable="true">
+					<c:out value="${bbsEntity.contents}" escapeXml="false"/>
 				</div>
-				<div class="form-group">
-					<label for="categoryEntity.categorySeq" class="col-sm-2 control-label">category</label>
-					<form:select path="categoryEntity.categorySeq" class="custom-select d-block w-50">
-						<c:forEach items="${categoryList}" var="ctgList">
-							<form:option value="${ctgList.getCategorySeq()}">${ctgList.getCategoryNm()}</form:option>
-						</c:forEach>					
-					</form:select>
-				</div>
-				<div class="form-group">
-					<label for="contents_user" class="col-sm-2 control-label">contents</label>
-					<%-- <form:textarea path="contents" class="form-control" placeholder="Enter contents" value="" style="height: 400px;" htmlEscape="false"/> --%>
-					<%-- <textarea rows="20" cols=100>
-						<c:out value="${bbsEntity.contents}" escapeXml="true"/>
-					</textarea> --%>
-					<div id="contents_user" name="contents_user" contenteditable="true">
-						<c:out value="${bbsEntity.contents}" escapeXml="false"/>
-					</div>
-					<input name = "contents" id = "contents" type="hidden" value=""/>
-				</div>
-				<div class="form-group">
-					<label for="useYn" class="col-sm-2 control-label">공개여부</label>
-					<label class="radio-inline">
-						<form:radiobutton path="useYn" label="Y" value="Y" checked="checked" />
-					</label>
-					<label class="radio-inline">
-						<form:radiobutton path="useYn" label="N" value="N"/>				
-					</label>
-				</div>
-				<button  class="btn btn-primary">등록</button>
+				<input name = "contents" id = "contents" type="hidden" value=""/>
+			</div>
+		    <hr/>
+		    <div>
+		  		<button type="button" class="btn btn-secondary btn-xs" onclick="wfSel.insert('<b>','</b>'); return false;">굵게</button>
+				<button type="button" class="btn btn-secondary btn-xs" onclick="wfSel.insert('','<hr/>'); return false;">구분선</button>
+			</div>
+	  	    <hr/>
+			<div class="form-group">
+				<form:select path="categoryEntity.categorySeq" class="custom-select d-block w-50">
+					<form:option value="0">카테고리</form:option>
+					<c:forEach items="${categoryList}" var="ctgList">
+						<form:option value="${ctgList.getCategorySeq()}">${ctgList.getCategoryNm()}</form:option>
+					</c:forEach>					
+				</form:select>
+			</div>	      
+			<div class="form-group">
+				<label for="useYn" class="col-sm-2 control-label">공개여부</label>
+				<label class="radio-inline">
+					<form:radiobutton path="useYn" label="Y" value="Y" checked="checked" />
+				</label>
+				<label class="radio-inline">
+					<form:radiobutton path="useYn" label="N" value="N"/>				
+				</label>
+			</div>
+			<hr/>				
+			<button  class="btn btn-primary">등록</button>
 			</form:form>
 			
 	      </div><!-- /.col-lg-10 -->
@@ -79,7 +82,9 @@
 		  return {
 		    setVariables: () => {
 		      sel = window.getSelection();
-		      if (!sel) return;
+		      if (!sel){
+		    	  return;
+		      }
 		      // Set variables
 		      range = sel.getRangeAt(0);
 		      content = range.cloneContents();

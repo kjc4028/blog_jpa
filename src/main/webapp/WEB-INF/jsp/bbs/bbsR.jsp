@@ -22,7 +22,7 @@
 					    <p>${bbsEntity.title}</p>
 					  </blockquote>
 					  <figcaption class="blockquote-footer">
-										카테고리 - ${bbsEntity.categoryEntity.categoryNm}
+						${bbsEntity.categoryEntity.categoryNm} | ${bbsEntity.regDate}
 					  </figcaption>
 					</figure>
 				</div>
