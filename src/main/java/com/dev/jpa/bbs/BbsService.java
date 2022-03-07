@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +35,7 @@ public class BbsService {
 		return bbsRepository.findAll();
 	}
 
+	
 	public Page<BbsEntity> findAllPage(int pageNum){
 		return bbsRepository.findAll( PageRequest.of(pageNum-1, 10, Sort.by(Sort.Direction.DESC, "bbsSeq")));
 	}
@@ -44,6 +46,12 @@ public class BbsService {
 	}
 
 	public Page<BbsEntity> findOpenPage(int pageNum){
+		Page<BbsEntity> page = bbsRepository.findByUseYn("Y", PageRequest.of(pageNum-1, 10, Sort.by(Sort.Direction.DESC, "bbsSeq")));
+		return page;
+	}
+	
+	@Cacheable(value = "bbsListMain")
+	public Page<BbsEntity> findOpenPageMain(int pageNum){
 		Page<BbsEntity> page = bbsRepository.findByUseYn("Y", PageRequest.of(pageNum-1, 10, Sort.by(Sort.Direction.DESC, "bbsSeq")));
 		return page;
 	}
