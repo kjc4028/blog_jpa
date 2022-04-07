@@ -19,7 +19,7 @@ public class RoleUsrEntity {
 	}
 	
 	@Id
-	@Column(nullable = false)
+	@Column(nullable = false, length=20)
 	private String usrId;
 	
 	@Column(nullable = false)
